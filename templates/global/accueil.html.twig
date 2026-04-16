@@ -4,14 +4,22 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    h1 {text-align: center ; }
+    nav{background-color: aliceblue;}
+    .nav ul {list-style-type: none;padding: 0;}
+    .nav li {display: inline;margin-right: 10px;}
+    .nav a {text-decoration: none;color: #333;}
+    .nav a:hover {text-decoration: underline;}
 </style>
 
 <div class="example-wrapper">
-    <h1>Bienvenue sur notre site</h1>
-<a href="{{ path('contact') }}">Aller à Contact</a>
-<a href="{{ path('A_propos') }}">Aller à À propos</a>
+<nav class="nav">
+    <ul>
+        <li><a href="{{ path('contact') }}">Contact</a></li>
+        <li><a href="{{ path('A_propos') }}">À propos</a></li>
+    </ul>
+</nav>
+    <h1>{{ title }}</h1>
 
 </div>
 {% endblock %}
