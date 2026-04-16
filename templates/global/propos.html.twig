@@ -10,6 +10,7 @@
     .nav li {display: inline;margin-right: 10px;}
     .nav a {text-decoration: none;color: #333;}
     .nav a:hover {text-decoration: underline;}
+    img{width: 300px; height: auto;}
 </style>
 
 <div class="example-wrapper">
@@ -33,5 +34,6 @@
     {% endfor %}
 </ul>
 <p>{{ dump() }}</p>
+<img src="{{ asset('images/toto.jpg') }}">
 </div>
 {% endblock %}
