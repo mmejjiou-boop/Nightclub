@@ -3,37 +3,108 @@
 {% block title %}Hello GlobalController!{% endblock %}
 
 {% block body %}
-<style>
-    h1 {text-align: center ; }
-     nav{background-color: aliceblue;}
-    .nav ul {list-style-type: none;padding: 0;}
-    .nav li {display: inline;margin-right: 10px;}
-    .nav a {text-decoration: none;color: #333;}
-    .nav a:hover {text-decoration: underline;}
-    img{width: 300px; height: auto;}
-</style>
 
-<div class="example-wrapper">
-<nav class="nav">
-    <ul>
-        <li><a href="{{ path('contact') }}">Contact</a></li>
-        <li><a href="{{ path('accueil') }}">Accueil</a></li>
-    </ul>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+<!-- NAVBAR -->
+<nav class="bg-white shadow-md">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+
+            <div class="text-xl font-bold text-blue-600">
+                MonSite
+            </div>
+
+            <div class="space-x-6 hidden md:flex">
+                <a href="#" class="text-gray-600 hover:text-blue-600">Accueil</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">À propos</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">Services</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600">Contact</a>
+            </div>
+
+            <div class="md:hidden">
+                <button class="text-gray-600">☰</button>
+            </div>
+
+        </div>
+    </div>
 </nav>
 
-<h1>hello word</h1>
-<h2>Historique de la discothèque</h2>
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-4 py-20 flex flex-col md:flex-row items-center">
 
-<ul>
-    {% for item in historique %}
-        <li>
-            <strong>{{ item.annee }}</strong> : {{ item.evenement }}
-        </li>
-    {% else %}
-        <li>Aucune donnée disponible</li>
-    {% endfor %}
-</ul>
-<p>{{ dump() }}</p>
-<img src="{{ asset('images/toto.jpg') }}">
-</div>
+    <div class="md:w-1/2 space-y-6">
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+            Bienvenue sur mon site
+        </h1>
+
+        <p class="text-gray-600 text-lg">
+            Ceci est une page de présentation faite avec Tailwind CSS. Simple, moderne et responsive.
+        </p>
+
+        <a href="#"
+           class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700">
+            Commencer
+        </a>
+    </div>
+
+    <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+        <img src="{{ asset('images/toto.jpg') }}"
+             class="w-80 h-80 object-cover rounded-2xl shadow-lg">
+    </div>
+
+</section>
+
+<!-- SECTION -->
+<section class="bg-white py-20">
+    <div class="max-w-6xl mx-auto px-4 text-center space-y-6">
+
+        <h2 class="text-3xl font-bold">À propos</h2>
+
+        <p class="text-gray-600 max-w-2xl mx-auto">
+            Cette section peut servir à te présenter, parler de ton projet ou de ton entreprise.
+            Tu peux ajouter du texte, des icônes ou des cartes.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8 mt-10">
+
+            <div class="p-6 bg-gray-50 rounded-xl shadow">
+                <h3 class="font-bold text-xl mb-2">Design</h3>
+                <p class="text-gray-600">Interface moderne et propre avec Tailwind.</p>
+            </div>
+
+            <div class="p-6 bg-gray-50 rounded-xl shadow">
+                <h3 class="font-bold text-xl mb-2">Responsive</h3>
+                <p class="text-gray-600">Compatible mobile, tablette et desktop.</p>
+            </div>
+
+            <div class="p-6 bg-gray-50 rounded-xl shadow">
+                <h3 class="font-bold text-xl mb-2">Rapide</h3>
+                <p class="text-gray-600">Optimisé et léger pour de meilleures performances.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-white py-6 mt-10">
+    <div class="text-center">
+        © 2026 MonSite - Tous droits réservés
+    </div>
+</footer>
+
+</body>
+</html>
+<script src="{{ asset('app.js') }}"></script>
 {% endblock %}

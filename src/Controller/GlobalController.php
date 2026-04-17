@@ -48,7 +48,6 @@ final class GlobalController extends AbstractController
                     'evenement' => 'sfb fs fsf'
                 ]
             ];
-            dump($historique);
             return $this->render('global/propos.html.twig', [
             'historique' => $historique
         ]);
