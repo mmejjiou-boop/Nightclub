@@ -5,6 +5,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\UX\Map\Bridge\Leaflet\LeafletOptions;
+use Symfony\UX\Map\Bridge\Leaflet\Option\TileLayer;
+use Symfony\UX\Map\InfoWindow;
+use Symfony\UX\Map\Map;
+use Symfony\UX\Map\Marker;
+use Symfony\UX\Map\Point;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\ContactType;
 
 final class GlobalController extends AbstractController
 {
@@ -19,11 +27,46 @@ final class GlobalController extends AbstractController
             ]);
         }
 
+
     #[Route('/contact', name: 'contact')]
-        public function contact(): Response
+        public function contact(Request $request): Response
         {
-            return $this->render('global/contact.html.twig');
+    
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // data is an array with "name", "email", and "message" keys
+            $data = $form->getData();
+            dd($data);
         }
+
+        $map = (new Map('default'))
+            ->center(new Point(45.7534031, 4.8295061))
+            ->zoom(6)
+
+            ->addMarker(new Marker(
+                position: new Point(45.7534031, 4.8295061),
+                title: 'Lyon',
+                infoWindow: new InfoWindow(
+                    content: '<p>Thank you <a href="https://github.com/Kocal">@Kocal</a> for this component!</p>',
+                )
+            ))
+
+            ->options((new LeafletOptions())
+                ->tileLayer(new TileLayer(
+                    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                    options: ['maxZoom' => 19]
+                ))
+            );
+            return $this->render('global/contact.html.twig', [
+                'map' => $map,
+                'form' => $form,
+            ]);
+        }
+        
+
+
 
     #[Route('/A_propos', name: 'A_propos')]
         public function propos(): Response
@@ -66,19 +109,6 @@ final class GlobalController extends AbstractController
         return new Response("Article nouveau");
     }
 
-    #[Route('/contacter', methods: ['GET'])]
-        public function contacter(): Response
-        {
-            return new Response("Nous contacter en GET");
-        }
-
-
-    #[Route('/contact_traitement', methods: ['POST'])]
-        public function contact_traitement(): Response
-        {
-            return new Response("Nous contacter en POST");
-        }
-
 
 #[Route("/json/etapes")]
 public function monJson()
@@ -94,5 +124,7 @@ public function monJson()
 }
 
 
-}
 
+
+
+}

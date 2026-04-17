@@ -1,26 +1,52 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello GlobalController!{% endblock %}
-
+{% form_theme form 'tailwind_2_layout.html.twig' %}
 {% block body %}
-<style>
-    h1 {text-align: center ; }
-        nav{background-color: aliceblue;}
 
-    .nav ul {list-style-type: none;padding: 0;}
-    .nav li {display: inline;margin-right: 10px;}
-    .nav a {text-decoration: none;color: #333;}
-    .nav a:hover {text-decoration: underline;}
-</style>
 
 <div class="example-wrapper">
-<nav class="nav">
-    <ul>
-        <li><a href="{{ path('A_propos') }}">À propos</a></li>
-        <li><a href="{{ path('accueil') }}">Accueil</a></li>
-    </ul>
+<nav class="bg-white shadow-md">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+
+            <div class="text-xl font-bold text-blue-600">
+                MonSite
+            </div>
+
+            <div class="space-x-6 hidden md:flex">
+                <a href="{{ path('accueil') }}" class="text-gray-600 hover:text-blue-600"> {{ ux_icon('bi:house-fill') }}</a>
+                <a href="{{ path('A_propos') }}" class="text-gray-600 hover:text-blue-600"> {{ ux_icon('bi:info-circle') }}</a>
+                <a href="{{ path('contact') }}" class="text-gray-600 hover:text-blue-600"> {{ ux_icon('bi:envelope') }}</a>
+            </div>
+
+            <div class="md:hidden">
+                <button class="text-gray-600">☰</button>
+            </div>
+
+        </div>
+    </div>
 </nav>
 <h1>hello you</h1>
+        <!-- pour un formulaire -->
+    <div class="max-w-2xl mx-auto border border-black-300">
+            {{ form_start(form, {'attr': {'class': 'space-y-4 '}} ) }}
+        {{ form_widget(form) }}
+
+            <button type="submit">
+                Envoyer
+            </button>
+
+        {{ form_end(form) }}
+    </div>
+    <br><br>
+        <!-- pour une carte du monde -->
+    <div>
+        {# The map must have a defined height #}
+        {{ ux_map(map, {style: 'height: 600px;'}) }}
+    </div>
+
+    <h1>Contact</h1>
 
 </div>
 {% endblock %}
